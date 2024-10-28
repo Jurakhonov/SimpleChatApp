@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import ChatWindow from "./ChatWindow";
+import "./App.css";
+import "./all.css";
 
-function App() {
+const App = () => {
+  const [messages, setMessages] = useState([]);
+  const addMessage = (user, message, time) => {
+    setMessages([...messages, { user, content: message, time }]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="chat__box">
+      <ChatWindow
+        user="Alex"
+        avatar="/2.png"
+        messages={messages}
+        addMessage={addMessage}
+      />
+      <ChatWindow
+        user="Pam"
+        avatar="/1.png"
+        messages={messages}
+        addMessage={addMessage}
+      />
     </div>
   );
-}
+};
 
 export default App;
